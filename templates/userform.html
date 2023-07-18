@@ -1,0 +1,75 @@
+<div class="mb-3">
+    <label for="exampleInputFullname" class="form-label">الاسم بالكامل</label>
+    <input type="text" value="{{user.fullname}}" name="fullname" class="form-control" id="exampleInputFullname">
+    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+  </div>
+  
+  
+  
+  
+  
+  
+  <div class="mb-3">
+    <label for="exampleInputmilitry_id" class="form-label">الرقم العسكري</label>
+    <input type="text" class="form-control" value="{{user.militry_id}}" name="militry_id" id="exampleInputmilitry_id" aria-describedby="militry_id">
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputmoahl" class="form-label">المؤهل</label>
+    <input type="text" class="form-control" id="exampleInputmoahl" value="{{user.moahl}}" name="moahl">
+  </div>
+  <div class="mb-3">
+    <label for="workCategories" class="form-label">نوع الخدمة</label>
+    <select value="{{user.work_category}}" name="work_category" class="form-control" id="workCategories">
+      <option value=""></option>
+      {% for workCategorie in workCategories %}
+        <option value="{{workCategorie.id}}">{{workCategorie.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="moahltypes" class="form-label">نوع المؤهل</label>
+    <select value="{{user.moahl_type}}" name="moahl_type" class="form-control" id="moahltypes">
+      <option value=""></option>
+      {% for moahltype in moahltypes %}
+        <option value="{{moahltype.id}}">{{moahltype.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="ranks" class="form-label">الرتبة</label>
+    <select value="{{user.rank}}" name="rank" class="form-control" id="ranks">
+      <option value=""></option>
+      {% for rank in ranks %}
+        <option value="{{rank.id}}">{{rank.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputTagnedDate" class="form-label">تاريخ التجنيد</label>
+    <input type="date" value="{{user.tagned_date}}" name="tagned_date" class="form-control" id="exampleInputTagnedDate">
+  </div>
+  
+  
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">تاريخ التسريح</label>
+    <input type="date" value="{{user.end_date}}" name="end_date" class="form-control" id="exampleInputEmail1">
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">كلمة المرور</label>
+    <input type="password" class="form-control" name="password" id="password" aria-describedby="password">
+  </div>
+
+  <div class="mb-3">
+    <label for="retypepassword" class="form-label">اعد كتابة كلمة المرور</label>
+    <input type="password" class="form-control" id="retypepassword" name="retypepassword" aria-describedby="retypepassword">
+  </div>
+
+
+
+  

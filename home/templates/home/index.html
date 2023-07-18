@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+    | Home
+{% endblock title %}
+
+
+{% block body %}
+
+<div class="container my-5">
+  <div class="row">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">م</th>
+          <th scope="col">الاسم</th>
+          <th scope="col">من</th>
+          <th scope="col">الي</th>
+          <th scope="col">التمام الاساسي</th>
+          <th scope="col">التمام الفرعي</th>
+          <th scope="col">حفظ</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for tamam in tamams %}  
+
+          <tr>
+            <form method="post" id="daily_tamam{{tamam}}">
+              {% csrf_token %}
+                <th scope="row">{{forloop.counter}}</th>
+                <td><input type="text" class="form-control" name="fullname" value="{{tamam.user.fullname}}" readonly></td> 
+                <td><input type="date" class="form-control" name="start_date" value="{{tamam.start_date|date:'Y-m-d' }}"></td> 
+                <!-- <td>{{t.start_date}}</td>  -->
+                <td><input type="date" class="form-control" name="end_date" value="{{tamam.end_date|date:'Y-m-d'}}"></td> 
+                
+                <td>
+                  <select name="tamam_asasy" id="tamam_asasy" class="form-control" type="text">
+                    <option value=""></option>
+                    {% for t in tamam_asasy %}
+                      <option value="{{t.id}}">{{t.name}}</option>
+                    {% endfor %}
+                  </select>
+                </td> 
+                <td>
+                  <select name="tamam_far3y" class="form-control" type="text">
+                    <option value="" class="EmptyValue"></option>
+                  </select>
+                </td> 
+                <td><button type="submit" class="btn btn-primary">حفظ</button></td> 
+            </form>
+
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  
+{% endblock body %}
+  
+  
+  
+  
+  
+  
+  

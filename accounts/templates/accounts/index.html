@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+    | accounts
+{% endblock title %}
+
+
+{% block body %}
+
+<div class="container my-5">
+  <div class="row">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">م</th>
+          <th scope="col">الرتبة</th>
+          <th scope="col">الاسم</th>
+          <th scope="col">الرقم العسكري</th>
+          <th scope="col">المؤهل</th>
+          <th scope="col">نوع الخدمة</th>
+          <th scope="col">تاريخ التجنيد</th>
+          <th scope="col">تاريخ التسريح</th>
+          <th scope="col">تعديل</th>
+          <th scope="col">حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{user.rank}}</td> 
+            <td>{{user.fullname}}</td> 
+            <td>{{user.militry_id}}</td> 
+            <td>{{user.moahl}}</td> 
+            <td>{{user.work_category}}</td> 
+            <td>{{user.tagned_date}}</td> 
+            <td>{{user.end_date}}</td> 
+            <td><a href="{% url 'accounts:edit' user.militry_id  %}" class="btn btn-primary">تعديل</a></td> 
+            <td><a href="{% url 'accounts:delete' user.militry_id  %}" class="btn btn-danger">حذف</a></td> 
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+  
+{% endblock body %}
+  
+  
+  
+  
+  
+  
+  
