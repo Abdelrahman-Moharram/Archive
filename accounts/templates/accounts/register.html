@@ -5,22 +5,14 @@
 {% block title %}
     | Register
 {% endblock title %}
-
-
 {% block body %}
-
 <div class="container w-50 my-5">
     <div class="row">
         <form method="post">
             {% csrf_token %}
             {% include  "userform.html" with user=user workCategories=workCategories moahltypes=moahltypes ranks=ranks %}
-              
-            
               <button class="btn btn-primary" type="submit">حفظ</button>
         </form>
     </div>
 </div>
-
-
-
 {% endblock body %}

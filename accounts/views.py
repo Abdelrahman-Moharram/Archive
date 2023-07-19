@@ -42,7 +42,6 @@ def register(request):
             # after saving form we should signin to account
             user = authenticate(request, username=request.POST['militry_id'], password=request.POST['password'])
             if user is not None:
-                print("\n\n\nuser==>", user)
                 login(request, user)
                 ## save date in session should be string not date -> we made [tagned_date, end_date] in str form
                 user._mutable = True

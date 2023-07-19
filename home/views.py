@@ -9,7 +9,6 @@ def index(request):
     tamams = []
     for user in User.objects.all():
         tamam = Tamam.objects.filter(user=user, start_date__gte=datetime.date.today())
-        print("==>",tamam)
         if not tamam:
             tamam = Tamam.objects.create(user=user)
             tamams.append(tamam)
@@ -21,9 +20,7 @@ def index(request):
         "tamam_far3y":Tamam_Far3y.objects.all()
         })
 
-def get_far3y_from_asasy(request, tamam_asasy=None):
-    print("==>tamam", tamam_asasy)
+def get_far3y_from_asasy(request, id=None):
     return JsonResponse({
-            "tamam_far3y":list(Tamam_Far3y.objects.filter(tamam_asasy=Tamam_Asasy.objects.get(id=1)).values('id', 'name'))
+            "tamam_far3y":list(Tamam_Far3y.objects.filter(tamam_asasy=Tamam_Asasy.objects.get(id=id)).values('id', 'name'))
         })
-    # return HttpResponse('Bad Request')

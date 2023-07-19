@@ -28,16 +28,16 @@
         {% for tamam in tamams %}  
 
           <tr>
-            <form method="post" id="daily_tamam{{tamam}}">
+            <form method="post">
               {% csrf_token %}
                 <th scope="row">{{forloop.counter}}</th>
                 <td><input type="text" class="form-control" name="fullname" value="{{tamam.user.fullname}}" readonly></td> 
-                <td><input type="date" class="form-control" name="start_date" value="{{tamam.start_date|date:'Y-m-d' }}"></td> 
+                <td><input type="date" class="form-control" name="start_date" value="{{tamam.start_date|date:'Y-m-d' }}" required></td> 
                 <!-- <td>{{t.start_date}}</td>  -->
-                <td><input type="date" class="form-control" name="end_date" value="{{tamam.end_date|date:'Y-m-d'}}"></td> 
+                <td><input type="date" class="form-control" name="end_date" value="{{tamam.end_date|date:'Y-m-d'}}" required></td> 
                 
                 <td>
-                  <select name="tamam_asasy" id="tamam_asasy" class="form-control" type="text">
+                  <select name="tamam_asasy" id="tamam_asasy_{{tamam.id}}" onchange="ChangeFar3y('{{tamam.id}}')" class="form-control" type="text" required>
                     <option value=""></option>
                     {% for t in tamam_asasy %}
                       <option value="{{t.id}}">{{t.name}}</option>
@@ -45,7 +45,7 @@
                   </select>
                 </td> 
                 <td>
-                  <select name="tamam_far3y" class="form-control" type="text">
+                  <select name="tamam_far3y" id="tamam_far3y_{{tamam.id}}" class="form-control testClass" type="text">
                     <option value="" class="EmptyValue"></option>
                   </select>
                 </td> 
