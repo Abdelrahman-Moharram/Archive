@@ -26,8 +26,8 @@ def index(request):
     tamams = []
     for user in User.objects.all():
 
-        tamam = Tamam.objects.filter(Q(start_date__gte=datetime.date.today())|
-                                     Q(end_date__lte=datetime.date.today()), 
+        tamam = Tamam.objects.filter(Q(start_date__lte=datetime.date.today())&
+                                     Q(end_date__gte=datetime.date.today()), 
                                      user=user)
         print("==>",tamam)
         
