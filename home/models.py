@@ -24,4 +24,7 @@ class Tamam(models.Model):
     tamam_far3y  = models.ForeignKey(Tamam_Far3y, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:
-        return str(self.user) + " " + str(self.tamam_asasy) + " من " + str(self.start_date) + " إلي " + str(self.end_date)
+        # print("\ntamam==>",dir(self))
+        if self:
+            return str(self.user) +" من " + str(self.start_date) + " إلي " + str(self.end_date)
+        return str(self.user)

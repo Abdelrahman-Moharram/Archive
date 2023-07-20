@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Tamam_Asasy, Tamam_Far3y, Tamam
 import datetime
 from accounts.models import User
-
+from django.db.models import Q
 
 def index(request):
     if request.method == "POST":
@@ -22,9 +22,15 @@ def index(request):
             if isinstance(tamam_far3y[id], str) or isinstance(tamam_far3y[id], int):
                     tamam.tamam_far3y=Tamam_Far3y.objects.get(id=tamam_far3y[id])
             tamam.save()
+        return redirect("home:index")
     tamams = []
     for user in User.objects.all():
-        tamam = Tamam.objects.filter(user=user, start_date__gte=datetime.date.today())
+
+        tamam = Tamam.objects.filter(Q(start_date__gte=datetime.date.today())|
+                                     Q(end_date__lte=datetime.date.today()), 
+                                     user=user)
+        print("==>",tamam)
+        
         if not tamam:
             tamam = Tamam.objects.create(user=user)
             tamams.append(tamam)
