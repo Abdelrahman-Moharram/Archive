@@ -30,6 +30,7 @@
           <tr>
               {% csrf_token %}
                 <th scope="row">{{forloop.counter}}</th>
+                <input type="text" class="form-control d-none" name="id" value="{{tamam.id}}" hidden>
                 <input type="text" class="form-control d-none" name="militry_id" value="{{tamam.user.militry_id}}" hidden>
                 <td><input type="text" class="form-control" name="fullname" value="{{tamam.user.fullname}}" readonly></td> 
                 <td><input type="date" class="form-control" name="start_date" value="{{tamam.start_date|date:'Y-m-d' }}" ></td> 
