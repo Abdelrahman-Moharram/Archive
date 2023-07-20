@@ -6,6 +6,22 @@ from accounts.models import User
 
 
 def index(request):
+    if request.method == "POST":
+        militry_id = request.POST.getlist("militry_id")
+        start_date = request.POST.getlist("start_date")
+        end_date = request.POST.getlist("end_date")
+        tamam_asasy = request.POST.getlist("tamam_asasy")
+        tamam_far3y = request.POST.getlist("tamam_far3y")
+        for id in range(len(militry_id)):
+            tamam = Tamam.objects.create(
+                user = User.objects.get(militry_id=militry_id[id]),
+                start_date = start_date[id],
+                end_date=end_date[id],
+                tamam_asasy=Tamam_Asasy.objects.get(id=tamam_asasy[id]),
+            )
+            if isinstance(tamam_far3y[id], int):
+                    tamam.tamam_far3y=Tamam_Far3y.objects.get(id=tamam_far3y[id])
+            tamam.save()
     tamams = []
     for user in User.objects.all():
         tamam = Tamam.objects.filter(user=user, start_date__gte=datetime.date.today())

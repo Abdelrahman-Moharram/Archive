@@ -18,9 +18,9 @@ class Tamam_Far3y(models.Model):
 
 class Tamam(models.Model):
     user         = models.ForeignKey(User, on_delete=models.CASCADE)
-    start_date   = models.DateField(null=True, blank=True)
-    end_date     = models.DateField(null=True, blank=True)
-    tamam_asasy  = models.ForeignKey(Tamam_Asasy, on_delete=models.PROTECT, null=True, blank=True)
+    start_date   = models.DateField()
+    end_date     = models.DateField()
+    tamam_asasy  = models.ForeignKey(Tamam_Asasy, on_delete=models.PROTECT)
     tamam_far3y  = models.ForeignKey(Tamam_Far3y, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:
