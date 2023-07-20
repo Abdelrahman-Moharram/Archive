@@ -47,8 +47,12 @@
                 </td> 
                 <td>
                   <select name="tamam_far3y" id="tamam_far3y_{{tamam.id}}" class="form-control testClass" type="text">
-                    <option value="{{tamam.tamam_far3y.id}}">{{tamam.tamam_far3y.name}}</option>
-                    
+                    <option  value="{{tamam.tamam_far3y.id}}">{{tamam.tamam_far3y.name}}</option>
+                    {% for t in tamam_far3y %}
+                      {% if t.id is not tamam.tamam_far3y.id and t.tamam_asasy == tamam.tamam_asasy %}
+                        <option value="{{t.id}}">{{t.name}}</option>
+                      {% endif %}
+                    {% endfor %}
                   </select>
                 </td> 
                 
