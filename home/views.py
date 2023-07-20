@@ -28,9 +28,7 @@ def index(request):
 
         tamam = Tamam.objects.filter(Q(start_date__lte=datetime.date.today())&
                                      Q(end_date__gte=datetime.date.today()), 
-                                     user=user)
-        print("==>",tamam)
-        
+                                     user=user)        
         if not tamam:
             tamam = Tamam.objects.create(user=user)
             tamams.append(tamam)
