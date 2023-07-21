@@ -19,8 +19,11 @@ def index(request):
             tamam.start_date = start_date[id]
             tamam.end_date=end_date[id]
             tamam.tamam_asasy=Tamam_Asasy.objects.get(id=tamam_asasy[id])
-            if isinstance(tamam_far3y[id], str) or isinstance(tamam_far3y[id], int):
-                    tamam.tamam_far3y=Tamam_Far3y.objects.get(id=tamam_far3y[id])
+            if tamam_far3y[id] in "1234567890" or isinstance(tamam_far3y[id], int):
+                    try:
+                        tamam.tamam_far3y=Tamam_Far3y.objects.get(id=tamam_far3y[id])
+                    except:
+                        print("\n\n\n\nfar3y==>",tamam_far3y[id],"\n\n\n")
             tamam.save()
         return redirect("home:index")
     tamams = []
@@ -44,3 +47,17 @@ def get_far3y_from_asasy(request, id=None):
     return JsonResponse({
             "tamam_far3y":list(Tamam_Far3y.objects.filter(tamam_asasy=Tamam_Asasy.objects.get(id=id)).values('id', 'name'))
         })
+
+
+def Nadafa(request):
+    tamam = Tamam.objects.filter(
+            Q(start_date__lte=datetime.date.today())&
+            Q(end_date__gte=datetime.date.today()), 
+        tamam_asasy=Tamam_Asasy.objects.get(name="موجود"),
+                                ).exclude(tamam_far3y=Tamam_Far3y.objects.get(name="ساعي"))
+    tamamOut = Tamam.objects.filter(
+            Q(start_date__lte=datetime.date.today())&
+            Q(end_date__gte=datetime.date.today()), 
+        tamam_asasy=Tamam_Asasy.objects.get(name="موجود"),
+        tamam_far3y=Tamam_Far3y.objects.get(name="ساعي"))
+    return render(request, "home/nadafa.html", {"usersIn":[i.user for i in tamam], "usersOut":[i.user for i in tamamOut]})

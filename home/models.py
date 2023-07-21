@@ -20,7 +20,7 @@ class Tamam(models.Model):
     user         = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date   = models.DateField(default=timezone.now)
     end_date     = models.DateField(default=timezone.now)
-    tamam_asasy  = models.ForeignKey(Tamam_Asasy, on_delete=models.PROTECT)
+    tamam_asasy  = models.ForeignKey(Tamam_Asasy, on_delete=models.PROTECT, null=True, blank=True)
     tamam_far3y  = models.ForeignKey(Tamam_Far3y, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self) -> str:

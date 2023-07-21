@@ -60,7 +60,7 @@ class accountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    fullname        = models.CharField(max_length=20,verbose_name="Full Name",unique=False)
+    fullname        = models.CharField(max_length=50,verbose_name="Full Name",unique=False)
     militry_id      = models.CharField(unique = True, max_length=30)
     password        = models.CharField(max_length=150)
     is_active       = models.BooleanField(default=True)

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+<style>
+    .swap-button{
+        height: fit-content;
+        position: relative;
+    }
+</style>
+<form method="post">
+    
+    <label for="users-in" class="form-label">المشاركون في قطاعات النظافة</label>
+    <label for="users-out" class="form-label">غير المشاركين في قطاعات النظافة</label>
+  <div class="mb-3 w-50 p-3  d-flex justify-center">
+    <select name="usersIn" class="form-control" style="height: 300px;" id="users-in" multiple>
+        {% for user in usersIn %}
+            <option value="{{user.id}}">{{user.fullname}}</option>
+        {% endfor %}
+    </select>
+    <button type="button" class="btn btn-dark swap-button">></button>
+    <button type="button" class="btn btn-dark swap-button"><</button>
+    <select name="usersOut" class="form-control" style="height: 300px;" id="users-out" multiple>
+        {% for user in usersOut %}
+            <option value="{{user.id}}">{{user.fullname}}</option>
+        {% endfor %}
+    </select>
+  </div>
+    
+</form>
+
+{% endblock body %}

@@ -21,43 +21,49 @@
   <div class="mb-3">
     <label for="workCategories" class="form-label">نوع الخدمة</label>
     <select value="{{user.work_category}}" name="work_category" class="form-control" id="workCategories">
-      <option value=""></option>
-      {% for workCategorie in workCategories %}
-        <option value="{{workCategorie.id}}">{{workCategorie.name}}</option>
+      <option value="{{user.work_category.id}}">{{user.work_category}}</option>
+      {% for workCategory in workCategories %}
+        {% if user.work_category.id != workCategory.id %}
+          <option value="{{workCategory.id}}">{{workCategory.name}}</option>
+        {% endif %}
       {% endfor %}
     </select>
   </div>
 
   <div class="mb-3">
     <label for="moahltypes" class="form-label">نوع المؤهل</label>
-    <select value="{{user.moahl_type}}" name="moahl_type" class="form-control" id="moahltypes">
-      <option value=""></option>
+    <select name="moahl_type" class="form-control" id="moahltypes">
+      <option value="{{user.moahl_type.id}}">{{user.moahl_type}}</option>
       {% for moahltype in moahltypes %}
+        {% if user.moahl_type.id != moahltype.id %}
         <option value="{{moahltype.id}}">{{moahltype.name}}</option>
+        {% endif %}
       {% endfor %}
     </select>
   </div>
 
   <div class="mb-3">
     <label for="ranks" class="form-label">الرتبة</label>
-    <select value="{{user.rank}}" name="rank" class="form-control" id="ranks">
-      <option value=""></option>
+    <select name="rank" class="form-control" id="ranks">
+      <option value="{{user.rank.id}}">{{user.rank}}</option>
       {% for rank in ranks %}
+      {% if user.rank.id != rank.id %}
         <option value="{{rank.id}}">{{rank.name}}</option>
+      {% endif %}
       {% endfor %}
     </select>
   </div>
 
   <div class="mb-3">
     <label for="exampleInputTagnedDate" class="form-label">تاريخ التجنيد</label>
-    <input type="date" value="{{user.tagned_date}}" name="tagned_date" class="form-control" id="exampleInputTagnedDate">
+    <input type="date" value="{{user.tagned_date|date:'Y-m-d'}}" name="tagned_date" class="form-control" id="exampleInputTagnedDate">
   </div>
   
   
 
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">تاريخ التسريح</label>
-    <input type="date" value="{{user.end_date}}" name="end_date" class="form-control" id="exampleInputEmail1">
+    <input type="date" value="{{user.end_date|date:'Y-m-d'}}" name="end_date" class="form-control" id="exampleInputEmail1">
   </div>
 
   <div class="mb-3">

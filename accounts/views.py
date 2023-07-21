@@ -14,6 +14,9 @@ def index(request):
 def addUser(request):
     form   = add_user_form()
     if request.method == "POST":
+        if request.POST['password'] != request.POST['retypepassword']:
+            messages.error(request,"Password doesn't match Retype Password")
+            return redirect("accounts:register")
         form = add_user_form(request.POST)
 
         if form.is_valid():
@@ -35,6 +38,9 @@ def register(request):
         return redirect("home:index")
     form   = add_user_form()
     if request.method == "POST":
+        if request.POST['password'] != request.POST['retypepassword']:
+            messages.error(request,"Password doesn't match Retype Password")
+            return redirect("accounts:register")
         form = add_user_form(request.POST)
         if form.is_valid():
             form = form.save()
@@ -122,11 +128,10 @@ def edit(request, militry_id):
         user.tagned_date = request.POST['tagned_date']
         user.end_date = request.POST['end_date']
         user.password = request.POST['password']
-        user.retypepassword = request.POST['retypepassword']
         user.save()
         messages.info(request,"تم تعديل بيانات "+user.fullname+ " بنجاح")
         return redirect("accounts:index")
-    return render(request,"accounts/addUser.html",{"user":user,
+    return render(request,"accounts/addUser.html",{"u":user,
                                                    "workCategories":Work_Category.objects.all(),
                                                     "moahltypes":Moahl_Type.objects.all(),
                                                     "ranks":Rank.objects.all()

@@ -1,7 +1,6 @@
 function ChangeFar3y(id){
     flag = false
     var select = document.getElementById('tamam_asasy_'+id).value
-    console.log("Here");
     $.ajax({
       url:'get_far3y/'+select+"/",
       type:'GET',
@@ -16,8 +15,24 @@ function ChangeFar3y(id){
         });
       },
       error: function(errs){
-        console.log("errors=>", errs);
+        console.error("errors=>", errs);
       }
     })
   }
 
+  function addOptions( fromId, toId ) {
+    var fromEl = document.getElementById( fromId ),
+        toEl = document.getElementById( toId );
+
+    if ( fromEl.selectedIndex >= 0 ) {
+        var index = toEl.options.length;
+
+        for ( var i = 0; i < fromEl.options.length; i++ ) {
+            if ( fromEl.options[ i ].selected ) {
+                toEl.options[ index ] = fromEl.options[ i ];
+                i--;
+                index++
+            }
+        }
+    }
+}

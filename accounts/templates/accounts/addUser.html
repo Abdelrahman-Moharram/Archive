@@ -13,9 +13,9 @@
     <div class="row">
         <form method="post">
             {% csrf_token %}
-            {% include "userform.html" with user=user workCategories=workCategories moahltypes=moahltypes ranks=ranks %}
+            {% include "userform.html" with user=u workCategories=workCategories moahltypes=moahltypes ranks=ranks %}
               
-            {% if user %}
+            {% if u %}
                 <button class="btn btn-primary" type="submit">حفظ</button>
             {% else %}
                 <button class="btn btn-primary" type="submit">حفظ</button>
