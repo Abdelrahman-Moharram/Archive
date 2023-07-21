@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Tamam_Asasy, Tamam_Far3y, Tamam
+from .models import Tamam_Asasy, Tamam_Far3y, Tamam, Qeta3_Nadafa
 import datetime
 from accounts.models import User
 from django.db.models import Q
@@ -49,7 +49,29 @@ def get_far3y_from_asasy(request, id=None):
         })
 
 
+
+
+def tawzee3(users, qeta3at):
+    print(users, qeta3at)
+
+
+
+
 def Nadafa(request):
+    if request.method == "POST":
+        ids = request.POST.getlist("users_ids[]")
+        qeta3_ids = request.POST.getlist("qeta3_ids[]")
+        users = []
+        qeta3at = []
+        for id in ids:
+            users.append(User.objects.get(id=id))
+        for qeta3_id in qeta3_ids:
+            qeta3at.append(Qeta3_Nadafa.objects.get(id=qeta3_id))
+        tawzee3(users, qeta3at)        
+    
+    
+    
+    # GET
     tamam = Tamam.objects.filter(
             Q(start_date__lte=datetime.date.today())&
             Q(end_date__gte=datetime.date.today()), 
@@ -60,4 +82,4 @@ def Nadafa(request):
             Q(end_date__gte=datetime.date.today()), 
         tamam_asasy=Tamam_Asasy.objects.get(name="موجود"),
         tamam_far3y=Tamam_Far3y.objects.get(name="ساعي"))
-    return render(request, "home/nadafa.html", {"usersIn":[i.user for i in tamam], "usersOut":[i.user for i in tamamOut]})
+    return render(request, "home/nadafa.html", {"usersIn":[i.user for i in tamam], "usersOut":[i.user for i in tamamOut], "qeta3In":Qeta3_Nadafa.objects.filter(is_main=True), "qeta3Out":Qeta3_Nadafa.objects.filter(is_main=False)})

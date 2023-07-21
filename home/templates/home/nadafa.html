@@ -7,25 +7,61 @@
         position: relative;
     }
 </style>
-<form method="post">
-    
-    <label for="users-in" class="form-label">المشاركون في قطاعات النظافة</label>
-    <label for="users-out" class="form-label">غير المشاركين في قطاعات النظافة</label>
-  <div class="mb-3 w-50 p-3  d-flex justify-center">
-    <select name="usersIn" class="form-control" style="height: 300px;" id="users-in" multiple>
-        {% for user in usersIn %}
-            <option value="{{user.id}}">{{user.fullname}}</option>
-        {% endfor %}
-    </select>
-    <button type="button" class="btn btn-dark swap-button">></button>
-    <button type="button" class="btn btn-dark swap-button"><</button>
-    <select name="usersOut" class="form-control" style="height: 300px;" id="users-out" multiple>
-        {% for user in usersOut %}
-            <option value="{{user.id}}">{{user.fullname}}</option>
-        {% endfor %}
-    </select>
-  </div>
-    
-</form>
+<div class="container">
+    <div class="row">
+        <form method="post" id="Nadafa-Form">
+            <input type="text" id="csrf" value="{{csrf_token}}" hidden>
+            <div class="mb-3 w-50 p-3  d-flex justify-center float-end">
+                <div class="form-group">
+                    <label for="users-in" class="form-label">المشاركون في قطاعات النظافة</label>
+                    <select name="usersIn" class="form-control" style="height: 300px;" id="users-in" multiple>
+                        {% for user in usersIn %}
+                        <option value="{{user.id}}">{{user.fullname}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class=" mx-4 my-5 d-grid py-5">        
+                    <button type="button" class="btn btn-dark swap-button" onclick="addOptions('users-in', 'users-out')">></button>
+                    <button type="button" class="btn btn-dark swap-button my-5" onclick="addOptions('users-out', 'users-in')"><</button>
+                </div>
+                <div class="form-group">
+                    <label for="users-out" class="form-label">غير المشاركين في قطاعات النظافة</label>
+                    <select name="usersOut" class="form-control" style="height: 300px;" id="users-out" multiple>
+                        {% for user in usersOut %}
+                            <option value="{{user.id}}">{{user.fullname}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+              </div>
+        
+        
+        
+              <div class="mb-3 w-50 p-3  d-flex justify-center">
+                <div class="form-group">
+                    <label for="qeta3-in" class="form-label">المشاركون في قطاعات النظافة</label>
+                    <select name="qeta3In" class="form-control" style="height: 300px;" id="qeta3-in" multiple>
+                        {% for qeta3 in qeta3In %}
+                        <option value="{{qeta3.id}}">{{qeta3.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class=" mx-4 my-5 d-grid py-5">        
+                    <button type="button" class="btn btn-dark swap-button" onclick="addOptions('qeta3-in', 'qeta3-out')">></button>
+                    <button type="button" class="btn btn-dark swap-button my-5" onclick="addOptions('qeta3-out', 'qeta3-in')"><</button>
+                </div>
+                <div class="form-group">
+                    <label for="qeta3-out" class="form-label">غير المشاركين في قطاعات النظافة</label>
+                    <select name="qeta3Out" class="form-control" style="height: 300px;" id="qeta3-out" multiple>
+                        {% for user in qeta3Out %}
+                            <option value="{{qeta3.id}}">{{qeta3.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+              </div>
+        
+            <button class="btn btn-primary mx-auto">توزيع</button>
+        </form>
+    </div>
+</div>
 
 {% endblock body %}

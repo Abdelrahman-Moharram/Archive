@@ -21,9 +21,8 @@ function ChangeFar3y(id){
   }
 
   function addOptions( fromId, toId ) {
-    var fromEl = document.getElementById( fromId ),
-        toEl = document.getElementById( toId );
-
+    var fromEl = document.getElementById( fromId );
+    var toEl = document.getElementById( toId );
     if ( fromEl.selectedIndex >= 0 ) {
         var index = toEl.options.length;
 
@@ -36,3 +35,33 @@ function ChangeFar3y(id){
         }
     }
 }
+
+let Nadafa = document.getElementById("Nadafa-Form")
+Nadafa.addEventListener("submit", (e)=>{
+  let ids = []
+  let qs = []
+  e.preventDefault();
+  uIn = document.getElementById("users-in")
+  qIn = document.getElementById("qeta3-in")
+  for (var i = 0; i < uIn.options.length; i++){
+    ids.push(uIn.options[i].value)
+  }
+  for (var i = 0; i < qIn.options.length; i++){
+    qs.push(qIn.options[i].value)
+  }
+  $.ajax({
+      url:'',
+      type:'POST',
+      data:{
+        csrfmiddlewaretoken:document.getElementById("csrf").value,
+        users_ids:ids,
+        qeta3_ids:qs
+      },
+      success: function(data){
+        // console.log(data);
+      },
+      error: function(errs){
+        console.error("errors=>", errs);
+      }
+    })
+})
