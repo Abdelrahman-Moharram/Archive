@@ -40,6 +40,7 @@ class Daily_Nadafa(models.Model):
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
     qeta3at_nadafa  = models.ManyToManyField(Qeta3_Nadafa)
     date            = models.DateField(default=timezone.now)
+    weight          = models.FloatField(default=0)
 
     class Meta:
         unique_together = ('user', 'date',)

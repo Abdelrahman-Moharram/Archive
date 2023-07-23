@@ -56,16 +56,25 @@ def get_far3y_from_asasy(request, id=None):
         })
 
 
+def weight_changer(old_weight, weights):
+    pass
 
+def Nadafa_For_weight(w):
+    Daily_Nadafa.objects.filter(weight=w)
 
 def tawzee3(users, qeta3at, daily_nadafa):
-    q_w = {}
-    print("\n\n",daily_nadafa)
-    for qeta3 in qeta3at:
-        if qeta3.weight in q_w:
-            q_w[qeta3.weight].append(qeta3)
-        else:
-            q_w[qeta3.weight] = [qeta3]
+    weights = [0]
+    
+    for q in qeta3at:
+        if q.weight not in weights:
+            weights.append(q.weight)
+    weights.sort(reverse=True)
+    print(weights)
+
+    for user in users:
+        old_weight = Daily_Nadafa.objects.filter(user=user).order_by('-date') | 0
+        Qeta3_Nadafa.objects.filter(weight=weight_changer(old_weight, weights))
+
     
 
 
@@ -75,16 +84,10 @@ def Nadafa(request):
     if request.method == "POST":
         ids = request.POST.getlist("users_ids[]")
         qeta3_ids = request.POST.getlist("qeta3_ids[]")
-        users = []
-        qeta3at = []
-        for id in ids:
-            users.append(User.objects.get(id=id))
-        for qeta3_id in qeta3_ids:
-            qeta3at.append(Qeta3_Nadafa.objects.get(id=qeta3_id))
-        tawzee3(users, qeta3at, Daily_Nadafa.objects.filter(
+        tawzee3(User.objects.filter(id__in=ids).order_by("-tagned_date"), Qeta3_Nadafa.objects.filter(id__in=qeta3_ids).order_by("-weight"), Daily_Nadafa.objects.filter(
             Q(date__lte=datetime.date.today()-datetime.timedelta(days=7))|
             Q(date=datetime.date.today()), 
-        ))        
+        ).order_by("-user"))        
     
     
     
