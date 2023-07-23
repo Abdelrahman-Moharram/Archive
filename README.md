@@ -4,4 +4,6 @@
  - filter tamam by date and user == done
 
  - ## Qwta3 Nadafa algorithm
+    - build the distribution algorithm
+    - try to modify the process effeciency (memory, process) 
  
