@@ -37,8 +37,17 @@ class Qeta3_Nadafa(models.Model):
         return self.name
     
 class Daily_Nadafa(models.Model):
-    user         = models.ForeignKey(User, on_delete=models.CASCADE)
-    qeta3_nadafa = models.ForeignKey(Qeta3_Nadafa, on_delete=models.CASCADE)
-    date         = models.DateField(default=timezone.now)
+    user            = models.ForeignKey(User, on_delete=models.CASCADE)
+    qeta3at_nadafa  = models.ManyToManyField(Qeta3_Nadafa)
+    date            = models.DateField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('user', 'date',)
     def __str__(self) -> str:
-        return self.user.fullname + " حصل علي " + self.qeta3_nadafa.name + " في يوم " + str(self.date)
+        if self.qeta3at_nadafa.all():
+            s = '{'
+            for q in  self.qeta3at_nadafa.all():
+                s += q.name + ", "
+            s+="}"
+            return self.user.fullname + " حصل علي " + s + " في يوم " + str(self.date)
+        return self.user.fullname
