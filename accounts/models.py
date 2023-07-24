@@ -72,6 +72,7 @@ class User(AbstractBaseUser):
     work_category   = models.ForeignKey(Work_Category, null=True, on_delete=models.PROTECT)
     tagned_date     = models.DateField(null=True, blank=True)
     end_date        = models.DateField(null=True, blank=True)
+    weight          = models.FloatField(default=0)
 
     def phones(self):
         return Users_Phone.objects.filter(user=self)

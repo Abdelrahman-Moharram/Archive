@@ -56,38 +56,12 @@ def get_far3y_from_asasy(request, id=None):
         })
 
 
-def weight_changer(old_weight, weights):
-    pass
-
-def Nadafa_For_weight(w):
-    Daily_Nadafa.objects.filter(weight=w)
-
-def tawzee3(users, qeta3at, daily_nadafa):
-    weights = [0]
-    
-    for q in qeta3at:
-        if q.weight not in weights:
-            weights.append(q.weight)
-    weights.sort(reverse=True)
-    print(weights)
-
-    for user in users:
-        old_weight = Daily_Nadafa.objects.filter(user=user).order_by('-date') | 0
-        Qeta3_Nadafa.objects.filter(weight=weight_changer(old_weight, weights))
-
-    
-
-
-
 
 def Nadafa(request):
     if request.method == "POST":
         ids = request.POST.getlist("users_ids[]")
         qeta3_ids = request.POST.getlist("qeta3_ids[]")
-        tawzee3(User.objects.filter(id__in=ids).order_by("-tagned_date"), Qeta3_Nadafa.objects.filter(id__in=qeta3_ids).order_by("-weight"), Daily_Nadafa.objects.filter(
-            Q(date__lte=datetime.date.today()-datetime.timedelta(days=7))|
-            Q(date=datetime.date.today()), 
-        ).order_by("-user"))        
+        tawzee3(User.objects.filter(id__in=ids).order_by("weight","-tagned_date"), Qeta3_Nadafa.objects.filter(id__in=qeta3_ids).order_by("-weight"), )        
     
     
     
@@ -103,3 +77,39 @@ def Nadafa(request):
         tamam_asasy=Tamam_Asasy.objects.get(name="موجود"),
         tamam_far3y=Tamam_Far3y.objects.get(name="ساعي"))
     return render(request, "home/nadafa.html", {"usersIn":[i.user for i in tamam], "usersOut":[i.user for i in tamamOut], "qeta3In":Qeta3_Nadafa.objects.filter(is_main=True), "qeta3Out":Qeta3_Nadafa.objects.filter(is_main=False)})
+
+
+
+
+
+
+
+
+
+def Change_Weight(user_daily_nadafa):
+    print("==>",user_daily_nadafa.values)
+    
+
+
+def tawzee3(users, qeta3at):
+    weights = [0]
+    for q in qeta3at:
+        if q.weight not in weights:
+            weights.append(q.weight)
+    weights.sort(reverse=True)
+    users_nadafa = {}
+    for i in range(len(users)):
+        users_nadafa[users[i]]=[qeta3at[i]]
+        qeta3at = qeta3at[0:]
+        # print(qeta3at)
+    print(users_nadafa)
+
+    #     user_daily_nadafa = Daily_Nadafa.objects.filter(user=user).order_by("-date") # اخر نضافه اليوزر شالها 
+    #     if not user_daily_nadafa:
+    #         daily_nadafa = Daily_Nadafa.objects.create(user=user)
+    #         daily_nadafa.qeta3at_nadafa.add(Qeta3_Nadafa.objects.get(weight=weights[0], id=qeta3at[0].id))
+    #         daily_nadafa.save()
+    #     else :
+    #         user_daily_nadafa = Change_Weight(user_daily_nadafa)
+            
+

@@ -6,6 +6,5 @@
  - ## Qwta3 Nadafa algorithm
     - build the distribution algorithm
     - try to modify the process effeciency (memory, process) 
- 
-
-select * from accounts_user where id in (SELECT user_id from home_daily_nadafa where id in (SELECT daily_nadafa_id from home_daily_nadafa_qeta3at_nadafa where qeta3_nadafa_id in (SELECT id from home_qeta3_nadafa where weight=4)))
+    ### todo 
+    - add function to randomly distribute all items for all user each -then-> both have same size (users, items)
