@@ -56,27 +56,6 @@ def get_far3y_from_asasy(request, id=None):
         })
 
 
-def weight_changer(old_weight, weights):
-    pass
-
-def Nadafa_For_weight(w):
-    Daily_Nadafa.objects.filter(weight=w)
-
-def tawzee3(users, qeta3at, daily_nadafa):
-    weights = [0]
-    
-    for q in qeta3at:
-        if q.weight not in weights:
-            weights.append(q.weight)
-    weights.sort(reverse=True)
-    print(weights)
-
-    for user in users:
-        old_weight = Daily_Nadafa.objects.filter(user=user).order_by('-date') | 0
-        Qeta3_Nadafa.objects.filter(weight=weight_changer(old_weight, weights))
-
-    
-
 
 
 
@@ -103,3 +82,70 @@ def Nadafa(request):
         tamam_asasy=Tamam_Asasy.objects.get(name="موجود"),
         tamam_far3y=Tamam_Far3y.objects.get(name="ساعي"))
     return render(request, "home/nadafa.html", {"usersIn":[i.user for i in tamam], "usersOut":[i.user for i in tamamOut], "qeta3In":Qeta3_Nadafa.objects.filter(is_main=True), "qeta3Out":Qeta3_Nadafa.objects.filter(is_main=False)})
+
+
+
+
+
+
+
+
+
+
+
+################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def weight_changer(old_weight, weights):
+    pass
+
+def Nadafa_For_weight(w):
+    Daily_Nadafa.objects.filter(weight=w)
+
+def tawzee3(users, qeta3at, daily_nadafa):
+    weights = [0]
+    
+    for q in qeta3at:
+        if q.weight not in weights:
+            weights.append(q.weight)
+    weights.sort(reverse=True)
+    print(weights)
+
+    for user in users:
+        old_weight = Daily_Nadafa.objects.filter(user=user).order_by('-date') | 0
+        Qeta3_Nadafa.objects.filter(weight=weight_changer(old_weight, weights))
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
